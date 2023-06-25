@@ -5,7 +5,7 @@ const form = document.querySelector('form')
 const chatContainer = document.querySelector('#chat_container')
 
 // todo 服务端获取 bot 回复内容
-const SERVER_URL = ""
+const SERVER_URL = "http://localhost:5001/"
 
 let loadInterval
 
