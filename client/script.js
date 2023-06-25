@@ -92,37 +92,38 @@ const handleSubmit = async (e) => {
   // 显示 loading 效果
   loader(messageDiv)
 
-  const response = await fetch(SERVER_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      prompt: data.get('prompt')
-    })
-  })
+  // const response = await fetch(SERVER_URL, {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  //   body: JSON.stringify({
+  //     prompt: data.get('prompt')
+  //   })
+  // })
 
-  // 清空 loading 效果
-  clearInterval(loadInterval)
-  messageDiv.innerHTML = " "
+  // // 清空 loading 效果
+  // clearInterval(loadInterval)
+  // messageDiv.innerHTML = " "
 
-  if(response.ok){
-    const data = await response.json()
-    // trims any trailing spaces/'\n' 
-    const parseData = data.bot.trim() 
+  // if(response.ok){
+  //   const data = await response.json()
+  //   // trims any trailing spaces/'\n' 
+  //   const parseData = data.bot.trim() 
 
-    typeText(messageDiv, parseData)
-  }else {
-    const err = await response.text()
+  //   typeText(messageDiv, parseData)
+  // }else {
+  //   const err = await response.text()
 
-    messageDiv.innerHTML = 'Something went wrong'
-    alert(err)
-  }
+  //   messageDiv.innerHTML = 'Something went wrong'
+  //   alert(err)
+  // }
 }
 
 form.addEventListener('submit', handleSubmit)
-form.addEventListener('keyup', (e) => {
-  if(e.keyCode === 13){
+form.addEventListener('keydown', (e) => {
+  // console.log(e.metaKey, e.key === 'Enter')
+  if(e.key === 'Enter' && (e.metaKey || e.ctrlKey)){
     // 按 Enter 键
     handleSubmit(e)
   }
